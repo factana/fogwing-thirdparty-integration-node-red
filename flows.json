@@ -1,0 +1,155 @@
+[
+    {
+        "id": "63adbd4c66cd37dd",
+        "type": "tab",
+        "label": "Flow 1",
+        "disabled": false,
+        "info": "",
+        "env": []
+    },
+    {
+        "id": "07f1aa36acce0abd",
+        "type": "inject",
+        "z": "63adbd4c66cd37dd",
+        "name": "Send Data",
+        "props": [
+            {
+                "p": "topic",
+                "vt": "str"
+            }
+        ],
+        "repeat": "",
+        "crontab": "",
+        "once": false,
+        "onceDelay": 0.1,
+        "topic": "",
+        "x": 200,
+        "y": 180,
+        "wires": [
+            [
+                "369be6c67d20fd73"
+            ]
+        ]
+    },
+    {
+        "id": "39471bcabaf27920",
+        "type": "http request",
+        "z": "63adbd4c66cd37dd",
+        "name": "OWM Request",
+        "method": "GET",
+        "ret": "txt",
+        "paytoqs": "query",
+        "url": "https://api.openweathermap.org/data/2.5/weather",
+        "tls": "",
+        "persist": false,
+        "proxy": "",
+        "insecureHTTPParser": false,
+        "authType": "",
+        "senderr": false,
+        "headers": [],
+        "x": 520,
+        "y": 180,
+        "wires": [
+            [
+                "cdad4021409b152e",
+                "3d066d0b33d70413"
+            ]
+        ]
+    },
+    {
+        "id": "369be6c67d20fd73",
+        "type": "function",
+        "z": "63adbd4c66cd37dd",
+        "name": "OWM Cred",
+        "func": "msg.payload = {\n    appid:'xxxxxxxxxxxxxxxxxxx', //OWM API Key\n    q:'Bengaluru' // City Name \n}\nreturn msg;",
+        "outputs": 1,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 350,
+        "y": 180,
+        "wires": [
+            [
+                "39471bcabaf27920"
+            ]
+        ]
+    },
+    {
+        "id": "cdad4021409b152e",
+        "type": "debug",
+        "z": "63adbd4c66cd37dd",
+        "name": "OWM Response",
+        "active": true,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "true",
+        "targetType": "full",
+        "statusVal": "",
+        "statusType": "auto",
+        "x": 720,
+        "y": 180,
+        "wires": []
+    },
+    {
+        "id": "3d066d0b33d70413",
+        "type": "function",
+        "z": "63adbd4c66cd37dd",
+        "name": "FW Cred",
+        "func": "msg.headers = {\n    accountID: 'xxxx', // Fogwing Account ID\n    apiKey: 'xxxxxxxxxxxxxxxxxxxx', // Fogwing API key\n    edgeEUI: 'xxxxxxxxxxxxx' // Edge EUI \n};\nreturn msg;",
+        "outputs": 1,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 380,
+        "y": 280,
+        "wires": [
+            [
+                "b66ccd36eb519a17"
+            ]
+        ]
+    },
+    {
+        "id": "b66ccd36eb519a17",
+        "type": "http request",
+        "z": "63adbd4c66cd37dd",
+        "name": "FW Request",
+        "method": "POST",
+        "ret": "txt",
+        "paytoqs": "ignore",
+        "url": "https://api.fogwing.net/api/v1/iothub/postPayload/withApiKey",
+        "tls": "",
+        "persist": false,
+        "proxy": "",
+        "insecureHTTPParser": false,
+        "authType": "",
+        "senderr": false,
+        "headers": [],
+        "x": 530,
+        "y": 280,
+        "wires": [
+            [
+                "c3e6a475fc5c2335"
+            ]
+        ]
+    },
+    {
+        "id": "c3e6a475fc5c2335",
+        "type": "debug",
+        "z": "63adbd4c66cd37dd",
+        "name": "FW Response",
+        "active": true,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "payload",
+        "targetType": "msg",
+        "statusVal": "",
+        "statusType": "auto",
+        "x": 700,
+        "y": 280,
+        "wires": []
+    }
+]
