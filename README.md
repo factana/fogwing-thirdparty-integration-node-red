@@ -12,8 +12,7 @@ This repository contains a Node-RED flow, that allows you to retrieve weather da
 To run the `flows.json` Node-RED flow, follow the step-by-step instructions below:
 
 ### **Step 1: Clone the Repository**
-- Clone the [fogwing-thirdpatry-integration-node-red](https://github.com/factana/fogwing-thirdparty-integration-node-red/)
-- https://github.com/factana/fogwing-thirdparty-integration-node-red/ repository containing the program code to your local machine.
+- Clone the [fogwing-thirdpatry-integration-node-red](https://github.com/factana/fogwing-thirdparty-integration-node-red/) repository containing the program code to your local machine.
 
 ### **Step 2: Install and run Node-RED**
 - Install Node-RED on your local machine by following [this](https://nodered.org/docs/getting-started/) guide which provides detailed instructions on the installation process for a smooth setup.
